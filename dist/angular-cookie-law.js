@@ -1,5 +1,5 @@
 /**
- * @palmabit/angular-cookie-law - @version v0.5.0 - @author Palmabit Srl<hello@palmabit.com>
+ * @palmabit/angular-cookie-law - @version v0.5.1 - @author Palmabit Srl<hello@palmabit.com>
  */
 'use strict';
 
@@ -21,7 +21,7 @@ angular.module('angular-cookie-law')
           acceptText: '@',
           declineText: '@',
           policyText: '@',
-          policyURL: '@',
+          policyUrl: '@',
           acceptButton: '@',
           declineButton: '@',
           policyButton: '@',
@@ -30,6 +30,9 @@ angular.module('angular-cookie-law')
           element: '@',
         },
         link: function (scope, element, attr) {
+          var acceptButton = '';
+          var declineButton = '';
+          var policyButton = '';
           var template, options, expireDate;
 
           scope.$watchGroup([
@@ -38,7 +41,7 @@ angular.module('angular-cookie-law')
             'acceptText',
             'declineText',
             'policyText',
-            'policyURL',
+            'policyUrl',
             'acceptButton',
             'declineButton',
             'policyButton',
@@ -59,7 +62,7 @@ angular.module('angular-cookie-law')
               declineText: attr.declineText || 'Disable Cookies', //Text on decline/disable button
               policyButton: attr.policyButton || false, //Set to true to show Privacy Policy button
               policyText: attr.policyText || 'Privacy Policy', //Text on Privacy Policy button
-              policyURL: attr.policyUrl || '/privacy-policy/', //URL of Privacy Policy
+              policyUrl: attr.policyUrl || '/privacy-policy/', //URL of Privacy Policy
               policyBlank: attr.policyBlank && attr.policyBlank === 'true' ? 'target="_blank"' : '',
               expireDays: attr.expireDays || 365, //Number of days for cookieBar cookie to be stored for
               element: attr.element || 'body' //Element to append/prepend cookieBar to. Remember "." for class or "#" for id.
@@ -80,7 +83,7 @@ angular.module('angular-cookie-law')
 
             if (options.policyButton) {
               policyButton =
-                ' <a href="' + options.policyURL + '" class="cl-policy" ' + options.policyBlank + '>' + options.policyText + '</a>';
+                ' <a href="' + options.policyUrl + '" class="cl-policy" ' + options.policyBlank + '>' + options.policyText + '</a>';
             }
 
             template =
@@ -119,6 +122,7 @@ angular.module('angular-cookie-law')
         }]
       }
     }]);
+
 angular.module('angular-cookie-law')
 
     .directive('cookieLawWait', ['CookieLawService', function (CookieLawService) {
